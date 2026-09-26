@@ -32,36 +32,24 @@ function PanelistsSection() {
                   loading="lazy"
                 />
 
-                <a
-                  className="panelist-card__linkedin"
-                  href={panelist.linkedin || "#"}
-                  aria-label={`${panelist.name} on LinkedIn`}
-                  target={panelist.linkedin ? "_blank" : undefined}
-                  rel={panelist.linkedin ? "noreferrer" : undefined}
-                  onClick={(event) => {
-                    if (!panelist.linkedin) {
-                      event.preventDefault();
-                    }
-                  }}
-                >
-                  <LinkedInIcon size={19} />
-                </a>
+                {panelist.linkedin && (
+                  <a
+                    className="panelist-card__linkedin"
+                    href={panelist.linkedin}
+                    aria-label={`${panelist.name} on LinkedIn`}
+                    target="_blank"
+                    rel="noreferrer"
+                  >
+                    <LinkedInIcon size={19} />
+                  </a>
+                )}
               </div>
 
               <div className="panelist-card__content">
                 <h3>{panelist.name}</h3>
-
-                <p className="panelist-card__role">
-                  {panelist.role}
-                </p>
-
-                <p className="panelist-card__company">
-                  {panelist.company}
-                </p>
-
-                <p className="panelist-card__bio">
-                  {panelist.bio}
-                </p>
+                <p className="panelist-card__role">{panelist.role}</p>
+                <p className="panelist-card__company">{panelist.company}</p>
+                <p className="panelist-card__bio">{panelist.bio}</p>
               </div>
             </article>
           ))}

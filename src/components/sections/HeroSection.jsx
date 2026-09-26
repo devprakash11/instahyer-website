@@ -10,12 +10,12 @@ import {
 
 import { eventDetails } from "../../data/webinarData";
 
-const detailIcons = [
-  CalendarDays,
-  Clock3,
-  MonitorPlay,
-  TicketCheck,
-];
+const detailIcons = {
+  Date: CalendarDays,
+  Time: Clock3,
+  Format: MonitorPlay,
+  Price: TicketCheck,
+};
 
 const registeredProfessionals = [
   "/images/alternatives/panelist-alternative-1.webp",
@@ -44,22 +44,14 @@ function HeroSection({ onRegister }) {
             in a distributed world.
           </p>
 
-          <div
-            className="hero__details"
-            aria-label="Webinar details"
-          >
-            {eventDetails.map((item, index) => {
-              const Icon = detailIcons[index];
+          <div className="hero__details" aria-label="Webinar details">
+            {eventDetails.map((item) => {
+              const Icon = detailIcons[item.label];
 
               return (
                 <div className="hero-detail" key={item.label}>
-                  <span className="hero-detail__icon">
-                    {Icon && (
-                      <Icon
-                        size={17}
-                        aria-hidden="true"
-                      />
-                    )}
+                  <span className="hero-detail__icon" aria-hidden="true">
+                    {Icon && <Icon size={17} />}
                   </span>
 
                   <div>
@@ -82,15 +74,9 @@ function HeroSection({ onRegister }) {
             </button>
 
             <div className="hero__registrations">
-              <span
-                className="avatar-stack"
-                aria-hidden="true"
-              >
+              <span className="avatar-stack" aria-hidden="true">
                 {registeredProfessionals.map((image, index) => (
-                  <span
-                    className="avatar-stack__item"
-                    key={image}
-                  >
+                  <span className="avatar-stack__item" key={image}>
                     <img
                       src={image}
                       alt=""
@@ -112,14 +98,8 @@ function HeroSection({ onRegister }) {
           </p>
         </div>
 
-        <div
-          className="hero__media"
-          aria-label="Remote hiring illustration"
-        >
-          <span
-            className="hero__glow"
-            aria-hidden="true"
-          />
+        <div className="hero__media" aria-label="Remote hiring illustration">
+          <span className="hero__glow" aria-hidden="true" />
 
           <img
             src="/images/hero-illustration.webp"

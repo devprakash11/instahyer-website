@@ -6,8 +6,8 @@ function BrandLogo({ className = '', ...props }) {
       src={brandConfig.logo}
       alt={brandConfig.name}
       className={`brand-logo ${className}`.trim()}
-      width="210"
-      height="48"
+      width="56"
+      height="56"
       decoding="async"
       {...props}
     />

@@ -1,0 +1,176 @@
+/* =========================================================
+   PHASE 5: REGISTRATION / FORM UX
+   ========================================================= */
+
+.registration-form {
+  display: grid;
+  gap: 18px;
+}
+
+.form-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 16px;
+}
+
+.form-field {
+  display: grid;
+  gap: 7px;
+  color: var(--text);
+  font-family: var(--font-heading);
+  font-size: 13px;
+  font-weight: 700;
+}
+
+.form-field > input,
+.form-field > textarea {
+  width: 100%;
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  background: #fff;
+  color: var(--text);
+  padding: 12px 13px;
+  outline: none;
+  transition: border-color 160ms ease, box-shadow 160ms ease, background 160ms ease;
+}
+
+.form-field > input {
+  min-height: 46px;
+}
+
+.form-field > textarea {
+  min-height: 104px;
+  resize: vertical;
+}
+
+.form-field > input:focus,
+.form-field > textarea:focus {
+  border-color: var(--secondary);
+  box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.12);
+}
+
+.form-field--error > input,
+.form-field--error > textarea {
+  border-color: #d64545;
+  background: #fffafa;
+}
+
+.form-error {
+  color: #b42318;
+  font-family: var(--font-body);
+  font-size: 12px;
+  font-weight: 600;
+  line-height: 1.4;
+}
+
+.form-consent {
+  position: relative;
+  display: grid;
+  grid-template-columns: 20px minmax(0, 1fr);
+  gap: 10px;
+  align-items: start;
+  color: var(--muted);
+  font-family: var(--font-body);
+  font-size: 12px;
+  line-height: 1.5;
+}
+
+.form-consent input {
+  width: 18px;
+  height: 18px;
+  margin: 1px 0 0;
+  accent-color: var(--secondary);
+}
+
+.form-consent .form-error {
+  grid-column: 2;
+}
+
+.form-consent--error {
+  color: #8f1d1d;
+}
+
+.registration-form__status {
+  min-height: 18px;
+  margin: -5px 0 0;
+  color: var(--muted);
+  font-size: 12px;
+  text-align: center;
+}
+
+.button__spinner {
+  animation: registration-spin 900ms linear infinite;
+}
+
+.form-success {
+  display: grid;
+  justify-items: center;
+  gap: 14px;
+  padding: 20px 4px 8px;
+  text-align: center;
+}
+
+.form-success h2 {
+  margin: 0;
+}
+
+.form-success h2:focus-visible {
+  outline: 3px solid rgba(255, 171, 14, 0.44);
+  outline-offset: 6px;
+  border-radius: 4px;
+}
+
+.form-success__eyebrow {
+  margin: 0;
+  color: var(--secondary);
+  font-family: var(--font-heading);
+  font-size: 13px;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+}
+
+.form-success > p:not(.form-success__eyebrow):not(.form-success__note) {
+  max-width: 48ch;
+  margin: 0;
+  color: var(--muted);
+}
+
+.form-success__note {
+  max-width: 52ch;
+  margin: 0;
+  padding: 11px 13px;
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  background: var(--surface-alt);
+  color: var(--muted);
+  font-size: 11px;
+  line-height: 1.55;
+}
+
+@keyframes registration-spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@media (max-width: 620px) {
+  .form-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .form-field > input,
+  .form-field > textarea {
+    font-size: 16px;
+  }
+
+  .form-success {
+    padding-top: 12px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .button__spinner {
+    animation: none;
+  }
+}

@@ -1,7 +1,7 @@
 node_modules/
 dist/
 .vite/
-.netlify/
+.vercel/
 
 .env
 .env.*

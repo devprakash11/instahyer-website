@@ -1,13 +1,17 @@
 :root {
-  --brand-primary: #5B3DF5;
-  --brand-primary-dark: #4730C7;
-  --brand-primary-light: #C7B8FF;
-  --brand-ink: #17152A;
-  --brand-muted: #625F73;
-  --brand-surface: #FFFFFF;
-  --brand-surface-soft: #F7F5FF;
-  --brand-border: #E7E3F2;
-  --brand-font-family: Inter, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-  --brand-heading-weight: 800;
+  --brand-primary: #081426;
+  --brand-primary-soft: #0d2140;
+  --brand-secondary: #2563eb;
+  --brand-secondary-soft: #dbe8ff;
+  --brand-accent: #ffab0e;
+  --brand-accent-dark: #e79000;
+  --brand-text: #13213a;
+  --brand-muted: #64718a;
+  --brand-surface: #ffffff;
+  --brand-surface-alt: #f5f8fd;
+  --brand-line: #dbe3ef;
+  --brand-heading-font: "Space Grotesk", sans-serif;
+  --brand-body-font: "Manrope", sans-serif;
+  --brand-heading-weight: 700;
   --brand-body-weight: 400;
 }

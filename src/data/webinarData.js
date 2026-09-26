@@ -1,8 +1,8 @@
 import {
   BadgeCheck,
+  BarChart3,
   Bot,
   Briefcase,
-  BarChart3,
   Globe2,
   Handshake,
   Lightbulb,
@@ -73,7 +73,7 @@ export const panelists = [
   },
   {
     name: "Mayank Singh",
-    role: "HR Bussiness Partner",
+    role: "HR Business Partner",
     company: "Amazon",
     bio: "Driving people strategies and scaling teams for high-growth business around the world.",
     image: "/images/panelist-mayank.webp",

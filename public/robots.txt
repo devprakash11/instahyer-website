@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://instahyer.com/sitemap.xml
+# Sitemap URL will be added once the canonical production domain is confirmed.

@@ -63,10 +63,39 @@ export default function SEO({ title = seoConfig.defaultTitle, description = seoC
 
     upsertJsonLd({
       "@context": "https://schema.org",
-      "@type": "WebSite",
-      name: seoConfig.siteName,
-      url: origin,
-      description,
+      "@graph": [
+        {
+          "@type": "WebSite",
+          name: seoConfig.siteName,
+          url: origin,
+          description,
+        },
+        {
+          "@type": "Event",
+          name: "The Future of Remote Hiring",
+          description,
+          startDate: "2026-08-22T16:00:00+05:30",
+          endDate: "2026-08-22T17:30:00+05:30",
+          eventStatus: "https://schema.org/EventScheduled",
+          eventAttendanceMode: "https://schema.org/OnlineEventAttendanceMode",
+          location: {
+            "@type": "VirtualLocation",
+            url: canonicalUrl,
+          },
+          offers: {
+            "@type": "Offer",
+            price: "0",
+            priceCurrency: "INR",
+            availability: "https://schema.org/InStock",
+            url: canonicalUrl,
+          },
+          organizer: {
+            "@type": "Organization",
+            name: seoConfig.siteName,
+            url: origin,
+          },
+        },
+      ],
     });
   }, [description, title]);
 

@@ -1,0 +1,99 @@
+/* =========================================================
+   PHASE 5: REGISTRATION / FORM UX
+   ========================================================= */
+
+.registration-form { display: grid; gap: 16px; }
+
+.form-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 14px; }
+
+.form-field {
+  display: grid;
+  min-width: 0;
+  gap: 7px;
+  color: var(--primary);
+  font-family: var(--font-heading);
+  font-size: 12px;
+  font-weight: 700;
+  line-height: 1.3;
+}
+
+.form-field > input,
+.form-field > textarea,
+.registration-form input:not([type="checkbox"]),
+.registration-form textarea {
+  width: 100%;
+  min-height: 44px;
+  padding: 11px 13px;
+  color: var(--primary);
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  outline: none;
+  background: #fff;
+  font: inherit;
+  font-family: var(--font-body);
+  font-size: 13px;
+  font-weight: 400;
+  line-height: 1.4;
+  transition: border-color 160ms ease, box-shadow 160ms ease, background 160ms ease;
+}
+
+.form-field > textarea,
+.registration-form textarea { min-height: 104px; resize: vertical; }
+
+.form-field > input:focus-visible,
+.form-field > textarea:focus-visible,
+.registration-form input:not([type="checkbox"]):focus-visible,
+.registration-form textarea:focus-visible {
+  border-color: var(--secondary);
+  box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.13);
+}
+
+.form-field--error > input,
+.form-field--error > textarea { border-color: #dc2626; background: #fffafa; }
+
+.form-field--error > input:focus-visible,
+.form-field--error > textarea:focus-visible {
+  border-color: #dc2626;
+  box-shadow: 0 0 0 3px rgba(220, 38, 38, 0.12);
+}
+
+.form-error {
+  display: block;
+  color: #b42318;
+  font-family: var(--font-body);
+  font-size: 11px;
+  font-weight: 500;
+  line-height: 1.4;
+}
+
+.form-consent {
+  position: relative;
+  display: grid;
+  grid-template-columns: 20px minmax(0, 1fr);
+  align-items: start;
+  gap: 9px;
+  color: var(--muted);
+  font-family: var(--font-body);
+  font-size: 11px;
+  font-weight: 400;
+  line-height: 1.5;
+}
+
+.form-consent input { width: 18px; height: 18px; margin: 1px 0 0; accent-color: var(--secondary); }
+.form-consent--error { color: #b42318; }
+.form-consent--error .form-error { grid-column: 2; }
+.registration-form .button:disabled { cursor: wait; opacity: 0.72; }
+.button__spinner { animation: form-spinner 800ms linear infinite; }
+
+@keyframes form-spinner { to { transform: rotate(360deg); } }
+
+@media (max-width: 620px) {
+  .form-grid { grid-template-columns: 1fr; }
+  .form-field > input,
+  .form-field > textarea,
+  .registration-form input:not([type="checkbox"]),
+  .registration-form textarea { font-size: 16px; }
+  .registration-form { gap: 14px; }
+}
+
+@media (prefers-reduced-motion: reduce) { .button__spinner { animation: none; } }

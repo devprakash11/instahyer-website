@@ -16,7 +16,7 @@ function AgendaSection() {
             light
           />
           <div className="agenda__interactive">
-            <MessageSquare size={22} />
+            <MessageSquare size={22} aria-hidden="true" />
             <div>
               <strong>Live and interactive</strong>
               <p>Submit your question during registration or ask it in the session.</p>
@@ -27,7 +27,7 @@ function AgendaSection() {
         <ol className="agenda__timeline">
           {agendaItems.map((item) => (
             <li key={item.number}>
-              <span className="agenda__marker">{item.number}</span>
+              <span className="agenda__marker" aria-hidden="true">{item.number}</span>
               <div className="agenda__item">
                 <span className="agenda__time">{item.time}</span>
                 <h3>{item.title}</h3>

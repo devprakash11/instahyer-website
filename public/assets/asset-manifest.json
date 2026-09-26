@@ -1,14 +1,15 @@
 {
   "brand": {
-    "logo": "/assets/brand/instahyer-logo.svg",
-    "favicon": "/assets/brand/instahyer-favicon.svg"
+    "logo": "/images/visual-element/Logo.png",
+    "favicon": "/images/visual-element/favicon-icon.png"
   },
   "legacyImages": {
     "path": "/images/",
     "status": "kept-for-compatibility",
-    "migration": "Move to /assets/images/<feature>/ only after all references are updated."
+    "migration": "Move feature images to /assets/images/<feature>/ only after all references are updated."
   },
   "naming": "lowercase-kebab-case",
+  "providedBrandAssets": true,
   "preferredRasterFormats": ["avif", "webp"],
   "preferredVectorFormat": "svg"
 }

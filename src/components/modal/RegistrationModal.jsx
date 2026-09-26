@@ -13,8 +13,6 @@ const initialForm = {
   consent: false,
 };
 
-const requiredFields = ["name", "email", "phone"];
-
 function RegistrationModal({ open, onClose }) {
   const titleId = useId();
   const descriptionId = useId();
@@ -22,11 +20,16 @@ function RegistrationModal({ open, onClose }) {
   const closeButtonRef = useRef(null);
   const successHeadingRef = useRef(null);
   const previousActiveElementRef = useRef(null);
+  const isSubmittingRef = useRef(false);
   const [form, setForm] = useState(initialForm);
   const [errors, setErrors] = useState({});
   const [submitted, setSubmitted] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
   useBodyLock(open);
+
+  useEffect(() => {
+    isSubmittingRef.current = isSubmitting;
+  }, [isSubmitting]);
 
   useEffect(() => {
     if (!open) return undefined;
@@ -35,7 +38,7 @@ function RegistrationModal({ open, onClose }) {
     const focusableSelector = 'a[href], button:not([disabled]), input:not([disabled]), select:not([disabled]), textarea:not([disabled]), [tabindex]:not([tabindex="-1"])';
 
     const onKeyDown = (event) => {
-      if (event.key === "Escape" && !isSubmitting) {
+      if (event.key === "Escape" && !isSubmittingRef.current) {
         onClose();
         return;
       }
@@ -66,7 +69,7 @@ function RegistrationModal({ open, onClose }) {
       previousActiveElementRef.current?.focus?.();
       previousActiveElementRef.current = null;
     };
-  }, [open, onClose, isSubmitting]);
+  }, [open, onClose]);
 
   useEffect(() => {
     if (!open) {
@@ -109,7 +112,7 @@ function RegistrationModal({ open, onClose }) {
 
   const handleSubmit = async (event) => {
     event.preventDefault();
-    if (isSubmitting) return;
+    if (isSubmittingRef.current) return;
 
     const nextErrors = validateForm();
     if (Object.keys(nextErrors).length) {
@@ -118,15 +121,17 @@ function RegistrationModal({ open, onClose }) {
       return;
     }
 
+    isSubmittingRef.current = true;
     setIsSubmitting(true);
     // No registration API is configured yet. Keep the UX state explicit until a real endpoint is connected.
     await new Promise((resolve) => window.setTimeout(resolve, 500));
+    isSubmittingRef.current = false;
     setIsSubmitting(false);
     setSubmitted(true);
   };
 
   const closeAndReset = () => {
-    if (isSubmitting) return;
+    if (isSubmittingRef.current) return;
     setForm(initialForm);
     setErrors({});
     setSubmitted(false);
@@ -138,7 +143,7 @@ function RegistrationModal({ open, onClose }) {
 
   return (
     <div className="modal-backdrop" role="presentation" onMouseDown={(event) => {
-      if (event.target === event.currentTarget && !isSubmitting) closeAndReset();
+      if (event.target === event.currentTarget && !isSubmittingRef.current) closeAndReset();
     }}>
       <section ref={dialogRef} className="registration-modal" role="dialog" aria-modal="true" aria-labelledby={titleId} aria-describedby={descriptionId}>
         <button ref={closeButtonRef} className="modal-close" type="button" aria-label="Close registration form" onClick={closeAndReset} disabled={isSubmitting}>

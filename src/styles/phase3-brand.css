@@ -2,14 +2,16 @@
 
 :root {
   --color-primary: var(--brand-primary);
-  --color-primary-dark: var(--brand-primary-dark);
-  --color-primary-light: var(--brand-primary-light);
-  --color-text: var(--brand-ink);
+  --color-primary-dark: var(--brand-primary-soft);
+  --color-secondary: var(--brand-secondary);
+  --color-accent: var(--brand-accent);
+  --color-text: var(--brand-text);
   --color-muted: var(--brand-muted);
   --color-surface: var(--brand-surface);
-  --color-surface-soft: var(--brand-surface-soft);
-  --color-border: var(--brand-border);
-  --font-family: var(--brand-font-family);
+  --color-surface-soft: var(--brand-surface-alt);
+  --color-border: var(--brand-line);
+  --font-heading: var(--brand-heading-font);
+  --font-family: var(--brand-body-font);
 }
 
 .brand-logo {

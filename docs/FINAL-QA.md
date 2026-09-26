@@ -11,7 +11,18 @@ npm run build
 npm run security:audit
 ```
 
-`qa:static` validates the production-critical source files and required brand/marketing assets. `build` verifies the Vite production bundle. `security:audit` checks dependencies at the configured high-severity threshold.
+`qa:static` validates the production-critical source files, Vercel configuration and required brand/marketing assets. `build` verifies the Vite production bundle. `security:audit` checks dependencies at the configured high-severity threshold.
+
+## Vercel deployment checks
+
+- Framework: Vite
+- Build command: `npm run build`
+- Output directory: `dist`
+- Node.js: 20.x
+- Production branch: `main`
+- SPA fallback is configured in `vercel.json`.
+- Production security headers are configured in `vercel.json`.
+- `.vercel/` is ignored by Git.
 
 ## Manual browser QA matrix
 
@@ -50,7 +61,8 @@ Before production launch, verify the deployed site at:
 - Verify Open Graph and Twitter metadata in the deployed HTML.
 - Validate JSON-LD structured data.
 - Verify the 404 route is not indexed.
-- Verify production security headers are present.
+- Verify Vercel security headers are present.
+- Verify hashed Vite assets are cached correctly.
 
 ## Release criteria
 
@@ -61,3 +73,4 @@ The site should only be considered production-ready when:
 3. `npm run security:audit` has no high-severity dependency findings that are accepted without remediation.
 4. The manual browser matrix above passes.
 5. The canonical domain is confirmed and configured.
+6. The Vercel production deployment reports Ready.

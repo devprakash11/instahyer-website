@@ -39,15 +39,20 @@ function upsertJsonLd(data) {
   element.textContent = JSON.stringify(data);
 }
 
-export default function SEO({ title = seoConfig.defaultTitle, description = seoConfig.defaultDescription }) {
+export default function SEO({
+  title = seoConfig.defaultTitle,
+  description = seoConfig.defaultDescription,
+  index = true,
+}) {
   useEffect(() => {
     const origin = window.location.origin;
     const canonicalUrl = `${origin}${window.location.pathname === "/" ? "/" : window.location.pathname}`;
     const imageUrl = new URL(seoConfig.defaultImage, origin).href;
+    const robots = index ? "index, follow" : "noindex, nofollow";
 
     document.title = title;
     upsertMeta("name", "description", description);
-    upsertMeta("name", "robots", "index, follow");
+    upsertMeta("name", "robots", robots);
     upsertMeta("property", "og:title", title);
     upsertMeta("property", "og:description", description);
     upsertMeta("property", "og:type", "website");
@@ -70,34 +75,38 @@ export default function SEO({ title = seoConfig.defaultTitle, description = seoC
           url: origin,
           description,
         },
-        {
-          "@type": "Event",
-          name: "The Future of Remote Hiring",
-          description,
-          startDate: "2026-08-22T16:00:00+05:30",
-          endDate: "2026-08-22T17:30:00+05:30",
-          eventStatus: "https://schema.org/EventScheduled",
-          eventAttendanceMode: "https://schema.org/OnlineEventAttendanceMode",
-          location: {
-            "@type": "VirtualLocation",
-            url: canonicalUrl,
-          },
-          offers: {
-            "@type": "Offer",
-            price: "0",
-            priceCurrency: "INR",
-            availability: "https://schema.org/InStock",
-            url: canonicalUrl,
-          },
-          organizer: {
-            "@type": "Organization",
-            name: seoConfig.siteName,
-            url: origin,
-          },
-        },
+        ...(index
+          ? [
+              {
+                "@type": "Event",
+                name: "The Future of Remote Hiring",
+                description,
+                startDate: "2026-08-22T16:00:00+05:30",
+                endDate: "2026-08-22T17:30:00+05:30",
+                eventStatus: "https://schema.org/EventScheduled",
+                eventAttendanceMode: "https://schema.org/OnlineEventAttendanceMode",
+                location: {
+                  "@type": "VirtualLocation",
+                  url: canonicalUrl,
+                },
+                offers: {
+                  "@type": "Offer",
+                  price: "0",
+                  priceCurrency: "INR",
+                  availability: "https://schema.org/InStock",
+                  url: canonicalUrl,
+                },
+                organizer: {
+                  "@type": "Organization",
+                  name: seoConfig.siteName,
+                  url: origin,
+                },
+              },
+            ]
+          : []),
       ],
     });
-  }, [description, title]);
+  }, [description, index, title]);
 
   return null;
 }

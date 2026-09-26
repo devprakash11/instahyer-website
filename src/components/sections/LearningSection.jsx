@@ -17,7 +17,7 @@ function LearningSection() {
             const Icon = item.icon;
             return (
               <article className="learning-card" key={item.title}>
-                <span><Icon size={25} /></span>
+                <span aria-hidden="true"><Icon size={25} /></span>
                 <h3>{item.title}</h3>
               </article>
             );

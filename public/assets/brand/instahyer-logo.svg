@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 420 96" role="img" aria-labelledby="title desc">
+  <title id="title">Instahyer</title>
+  <desc id="desc">Instahyer wordmark</desc>
+  <g fill="none" fill-rule="evenodd">
+    <rect x="4" y="8" width="80" height="80" rx="20" fill="#5B3DF5"/>
+    <path d="M28 30h32v10H40v26h20v10H28V30Z" fill="#fff"/>
+    <path d="M52 30h12v46H52z" fill="#C7B8FF"/>
+    <text x="104" y="65" font-family="Inter, Arial, sans-serif" font-size="52" font-weight="800" letter-spacing="-2" fill="#17152A">Instahyer</text>
+  </g>
+</svg>

@@ -22,7 +22,9 @@ function AboutSection() {
             </p>
           </div>
           <aside className="contest-note">
-            <span><Trophy size={20} /></span>
+            <span aria-hidden="true">
+              <Trophy size={20} />
+            </span>
             <p>
               Enter the <strong>#FutureOfHR Contest</strong> by submitting your question for the panel. The most interesting entries stand a chance to win exciting prizes.
             </p>

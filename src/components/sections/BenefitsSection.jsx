@@ -3,10 +3,7 @@ import { benefits } from "../../data/webinarData";
 
 function BenefitsSection() {
   return (
-    <section className="benefits" aria-labelledby="benefits-title">
-      <h2 id="benefits-title" className="sr-only">
-        Webinar benefits
-      </h2>
+    <section className="benefits" aria-label="Webinar benefits">
       <div className="container benefits__grid">
         {benefits.map((item, index) => {
           const Icon = item.icon;

@@ -1,7 +1,7 @@
 export const brandConfig = {
   name: "Instahyer",
-  logo: "/assets/brand/instahyer-logo.svg",
-  favicon: "/assets/brand/instahyer-favicon.svg",
+  logo: "/images/visual-element/Logo.png",
+  favicon: "/images/visual-element/favicon-icon.png",
   colors: {
     primary: "#081426",
     primarySoft: "#0d2140",

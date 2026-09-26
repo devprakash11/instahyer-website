@@ -1,15 +1,11 @@
 import React from "react";
-import HomePage from "./pages/HomePage";
-import NotFoundPage from "./pages/NotFoundPage";
+import { resolveRoute } from "./config/routes";
 
 function App() {
-  const path = window.location.pathname.replace(/\/+$/, "") || "/";
+  const route = resolveRoute(window.location.pathname);
+  const Page = route.element;
 
-  if (path === "/") {
-    return <HomePage />;
-  }
-
-  return <NotFoundPage />;
+  return <Page />;
 }
 
 export default App;

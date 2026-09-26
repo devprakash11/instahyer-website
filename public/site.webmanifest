@@ -1,7 +1,7 @@
 {
-  "name": "Instahyer Remote Hiring Webinar",
-  "short_name": "Instahyer",
-  "description": "Instahyer webinar on the future of remote hiring, scalable recruitment and future-ready HR leadership.",
+  "name": "People First Remote Hiring Webinar",
+  "short_name": "People First",
+  "description": "People First webinar on the future of remote hiring, scalable recruitment and future-ready HR leadership.",
   "start_url": "/",
   "display": "standalone",
   "background_color": "#081426",

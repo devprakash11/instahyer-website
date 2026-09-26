@@ -1,22 +1,16 @@
-# People First - Remote Hiring Webinar
+# Instahyer - Remote Hiring Webinar
 
-A responsive React + Vite landing page recreated from the supplied one-page webinar design.
+A responsive React + Vite landing page for the Instahyer remote hiring webinar.
 
 ## Technology
 
-- HTML5 through semantic React components
+- Semantic React components
 - CSS3 with desktop, tablet and mobile breakpoints
 - JavaScript for navigation, modal behaviour and registration form state
 - React 18 for reusable components
 - Vite 5 for development and production builds
 
 ## Run locally
-
-### Windows quick start
-
-Double-click `RUN-WEBSITE.bat`.
-
-### Terminal
 
 ```bash
 npm install
@@ -32,23 +26,41 @@ npm run build
 npm run preview
 ```
 
-## Asset locations
+## SEO
 
-- Hero background: `public/images/hero-background.jpg`
-- Hero illustration: `public/images/hero-illustration.webp`
-- About illustration: `public/images/about-illustration.webp`
-- Panelists: `public/images/panelist-*.webp`
-- Final CTA illustration: `public/images/registration-illustration.webp`
-- Alternative portraits: `public/images/alternatives/`
+SEO metadata is centralized in `src/config/seo.config.js` and applied through `src/components/common/SEO.jsx`.
 
-## Add your logo
+The application includes:
 
-The header and footer intentionally use a blank logo placeholder. Replace the `LogoPlaceholder` component in `src/components/common/LogoPlaceholder.jsx` with your own image:
+- Page title and meta description
+- Canonical URL generation from the active origin
+- Open Graph metadata
+- Twitter card metadata
+- `index, follow` for the primary page
+- `noindex, nofollow` for the fallback 404 route
+- Website and webinar Event JSON-LD structured data
+- `public/robots.txt`
+- `public/sitemap.xml` foundation
 
-```jsx
-<img src="/images/logo.svg" alt="People First" className="brand-logo" />
+Before production launch, replace the placeholder sitemap URL with the confirmed canonical production domain.
+
+## Assets
+
+Brand assets are stored under `public/images/visual-element/` and referenced through `src/config/brand.config.js`.
+
+Marketing imagery remains under `public/images/` to preserve existing asset paths.
+
+## Architecture
+
+```text
+src/
+├── components/
+├── config/
+│   ├── brand.config.js
+│   ├── routes.js
+│   └── seo.config.js
+├── data/
+├── hooks/
+├── pages/
+└── styles/
 ```
-
-## Content note
-
-The section order and core copy follow the provided assignment. Clear typographical mistakes in the reference were corrected for a professional final page.

@@ -1,6 +1,6 @@
 import React from "react";
 import { Menu, X } from "lucide-react";
-import LogoPlaceholder from "../common/LogoPlaceholder";
+import BrandLogo from "../common/BrandLogo";
 
 const navLinks = [
   { label: "Home", href: "#home" },
@@ -15,7 +15,7 @@ function Header({ menuOpen, onToggleMenu, onCloseMenu, onRegister }) {
     <header className="site-header">
       <div className="container site-header__inner">
         <a className="site-header__brand" href="#home" onClick={onCloseMenu}>
-          <LogoPlaceholder light />
+          <BrandLogo light />
         </a>
 
         <button
@@ -26,7 +26,7 @@ function Header({ menuOpen, onToggleMenu, onCloseMenu, onRegister }) {
           aria-controls="primary-navigation"
           onClick={onToggleMenu}
         >
-          {menuOpen ? <X size={22} /> : <Menu size={22} />}
+          {menuOpen ? <X size={22} aria-hidden="true" /> : <Menu size={22} aria-hidden="true" />}
         </button>
 
         <nav

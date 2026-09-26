@@ -1,8 +1,6 @@
 /* =========================================================
    PHASE 4: RESPONSIVE + UI REFINEMENT
    Targeted responsive rules for desktop, tablet and mobile.
-   Kept separate from the legacy stylesheet so responsive
-   behaviour remains easy to audit and maintain.
    ========================================================= */
 
 html,
@@ -10,6 +8,15 @@ body,
 #root {
   max-width: 100%;
   overflow-x: hidden;
+}
+
+/* Keep interactive controls comfortable on touch devices. */
+.menu-toggle,
+.site-nav__button,
+.modal-close,
+.button,
+.panelist-card__linkedin {
+  touch-action: manipulation;
 }
 
 @media (max-width: 1100px) {
@@ -183,6 +190,11 @@ body,
 
   .site-header__inner {
     min-height: 70px;
+  }
+
+  .site-header__brand img {
+    max-width: min(170px, 54vw);
+    height: auto;
   }
 
   .section-heading {
@@ -396,6 +408,29 @@ body,
   }
 }
 
+/* Landscape phones have very limited vertical space. */
+@media (max-width: 820px) and (orientation: landscape) {
+  .hero {
+    padding-top: 96px;
+    padding-bottom: 48px;
+  }
+
+  .hero__inner {
+    grid-template-columns: minmax(0, 1fr) minmax(260px, 0.72fr);
+    align-items: center;
+    gap: 28px;
+  }
+
+  .hero__media {
+    width: min(100%, 360px);
+  }
+
+  .hero h1 {
+    font-size: clamp(34px, 6vw, 48px);
+  }
+}
+
+/* Avoid sticky hover states on touch devices. */
 @media (hover: none) and (pointer: coarse) {
   .button:hover {
     transform: none;
@@ -406,6 +441,15 @@ body,
   }
 }
 
+/* Keep keyboard focus visible after responsive overrides. */
+@media (max-width: 820px) {
+  .site-nav a:focus-visible,
+  .site-nav button:focus-visible {
+    outline-offset: -2px;
+  }
+}
+
+/* Respect users who prefer reduced motion. */
 @media (prefers-reduced-motion: reduce) {
   html {
     scroll-behavior: auto;
@@ -421,10 +465,11 @@ body,
   }
 }
 
+/* Account for device safe areas without changing the desktop layout. */
 @supports (padding: max(0px)) {
   .site-header__inner,
-  .hero__inner,
-  .container {
-    padding-inline: max(0px, env(safe-area-inset-left)) max(0px, env(safe-area-inset-right));
+  .hero__inner {
+    padding-inline-start: max(0px, env(safe-area-inset-left));
+    padding-inline-end: max(0px, env(safe-area-inset-right));
   }
 }

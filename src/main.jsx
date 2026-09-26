@@ -7,6 +7,7 @@ import "./styles/phase3-brand.css";
 import "./styles/phase4-responsive.css";
 import "./styles/phase5-registration.css";
 import "./styles/phase8-accessibility.css";
+import "./styles/phase9-performance.css";
 
 ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>

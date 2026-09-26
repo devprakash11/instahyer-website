@@ -81,6 +81,9 @@ function HeroSection({ onRegister }) {
                       src={image}
                       alt=""
                       loading={index === 0 ? "eager" : "lazy"}
+                      decoding="async"
+                      width="44"
+                      height="44"
                     />
                   </span>
                 ))}
@@ -105,6 +108,7 @@ function HeroSection({ onRegister }) {
             src="/images/hero-illustration.webp"
             alt="Remote hiring profiles and recruitment dashboard"
             fetchPriority="high"
+            decoding="async"
           />
 
           <div className="hero__media-badge">

@@ -8,6 +8,7 @@ function BrandLogo({ className = '', ...props }) {
       className={`brand-logo ${className}`.trim()}
       width="210"
       height="48"
+      decoding="async"
       {...props}
     />
   );

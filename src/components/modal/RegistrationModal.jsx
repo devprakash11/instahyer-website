@@ -1,4 +1,4 @@
-import React, { useEffect, useId, useState } from "react";
+import React, { useEffect, useId, useRef, useState } from "react";
 import { CheckCircle2, X } from "lucide-react";
 import useBodyLock from "../../hooks/useBodyLock";
 
@@ -15,6 +15,10 @@ const initialForm = {
 
 function RegistrationModal({ open, onClose }) {
   const titleId = useId();
+  const descriptionId = useId();
+  const dialogRef = useRef(null);
+  const closeButtonRef = useRef(null);
+  const previousActiveElementRef = useRef(null);
   const [form, setForm] = useState(initialForm);
   const [submitted, setSubmitted] = useState(false);
   useBodyLock(open);
@@ -22,12 +26,48 @@ function RegistrationModal({ open, onClose }) {
   useEffect(() => {
     if (!open) return undefined;
 
+    previousActiveElementRef.current = document.activeElement;
+
+    const focusableSelector =
+      'a[href], button:not([disabled]), input:not([disabled]), select:not([disabled]), textarea:not([disabled]), [tabindex]:not([tabindex="-1"])';
+
     const onKeyDown = (event) => {
-      if (event.key === "Escape") onClose();
+      if (event.key === "Escape") {
+        onClose();
+        return;
+      }
+
+      if (event.key !== "Tab" || !dialogRef.current) return;
+
+      const focusableElements = Array.from(
+        dialogRef.current.querySelectorAll(focusableSelector),
+      );
+
+      if (focusableElements.length === 0) {
+        event.preventDefault();
+        return;
+      }
+
+      const firstElement = focusableElements[0];
+      const lastElement = focusableElements[focusableElements.length - 1];
+
+      if (event.shiftKey && document.activeElement === firstElement) {
+        event.preventDefault();
+        lastElement.focus();
+      } else if (!event.shiftKey && document.activeElement === lastElement) {
+        event.preventDefault();
+        firstElement.focus();
+      }
     };
 
     window.addEventListener("keydown", onKeyDown);
-    return () => window.removeEventListener("keydown", onKeyDown);
+    closeButtonRef.current?.focus();
+
+    return () => {
+      window.removeEventListener("keydown", onKeyDown);
+      previousActiveElementRef.current?.focus?.();
+      previousActiveElementRef.current = null;
+    };
   }, [open, onClose]);
 
   useEffect(() => {
@@ -66,20 +106,28 @@ function RegistrationModal({ open, onClose }) {
       }}
     >
       <section
+        ref={dialogRef}
         className="registration-modal"
         role="dialog"
         aria-modal="true"
         aria-labelledby={titleId}
+        aria-describedby={descriptionId}
       >
-        <button className="modal-close" type="button" aria-label="Close registration form" onClick={closeAndReset}>
-          <X size={19} />
+        <button
+          ref={closeButtonRef}
+          className="modal-close"
+          type="button"
+          aria-label="Close registration form"
+          onClick={closeAndReset}
+        >
+          <X size={19} aria-hidden="true" />
         </button>
 
         {!submitted ? (
           <>
             <p className="modal-kicker">Free live webinar</p>
             <h2 id={titleId}>Reserve your seat</h2>
-            <p className="modal-intro">
+            <p id={descriptionId} className="modal-intro">
               Complete the form to register. You may also submit a question for the #FutureOfHR contest.
             </p>
 
@@ -133,10 +181,10 @@ function RegistrationModal({ open, onClose }) {
           </>
         ) : (
           <div className="form-success">
-            <CheckCircle2 size={58} strokeWidth={1.6} />
+            <CheckCircle2 size={58} strokeWidth={1.6} aria-hidden="true" />
             <p className="form-success__eyebrow">Registration received</p>
             <h2 id={titleId}>Your seat is reserved.</h2>
-            <p>
+            <p id={descriptionId}>
               Thank you, {form.name || "there"}. Webinar details will be sent to {form.email || "your email address"}.
             </p>
             <button className="button button--primary" type="button" onClick={closeAndReset}>

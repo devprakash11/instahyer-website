@@ -1,14 +1,15 @@
-import React from "react";
+import { brandConfig } from '../../config/brand.config';
 
-function BrandLogo({ light = false }) {
+function BrandLogo({ className = '', ...props }) {
   return (
-    <span
-      className={`logo-placeholder${light ? " logo-placeholder--light" : ""}`}
-      aria-label="Instahyer"
-      role="img"
-    >
-      <span className="logo-placeholder__box">Instahyer</span>
-    </span>
+    <img
+      src={brandConfig.logo}
+      alt={brandConfig.name}
+      className={`brand-logo ${className}`.trim()}
+      width="210"
+      height="48"
+      {...props}
+    />
   );
 }
 

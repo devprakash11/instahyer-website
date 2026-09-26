@@ -1,0 +1,14 @@
+{
+  "brand": {
+    "logo": "/assets/brand/instahyer-logo.svg",
+    "favicon": "/assets/brand/instahyer-favicon.svg"
+  },
+  "legacyImages": {
+    "path": "/images/",
+    "status": "kept-for-compatibility",
+    "migration": "Move to /assets/images/<feature>/ only after all references are updated."
+  },
+  "naming": "lowercase-kebab-case",
+  "preferredRasterFormats": ["avif", "webp"],
+  "preferredVectorFormat": "svg"
+}

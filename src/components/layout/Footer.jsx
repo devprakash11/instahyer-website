@@ -48,7 +48,7 @@ function Footer() {
 
       <div className="site-footer__bottom">
         <div className="container">
-          <p>© 2026 Instahyer. All rights reserved.</p>
+          <p>© 2026 Limitless Design. All rights reserved.</p>
           <div>
             <a href="#">Privacy Policy</a>
             <a href="#">Terms & Conditions</a>

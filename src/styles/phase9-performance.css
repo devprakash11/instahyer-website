@@ -1,0 +1,49 @@
+/* =========================================================
+   PHASE 9: PERFORMANCE
+   ========================================================= */
+
+/* Keep below-the-fold sections out of the initial rendering work while
+   preserving their layout footprint once they approach the viewport. */
+.about,
+.benefits,
+.learning,
+.panelists,
+.agenda,
+.why-attend,
+.contest,
+.final-cta,
+.site-footer {
+  content-visibility: auto;
+  contain-intrinsic-size: auto 720px;
+}
+
+/* Avoid expensive paint work for decorative layers that do not affect layout. */
+.hero__texture,
+.hero__glow,
+.hero__media::before {
+  contain: paint;
+  pointer-events: none;
+}
+
+/* Keep large media from creating unnecessary layout work outside its frame. */
+.media-frame {
+  contain: layout paint;
+}
+
+/* Prefer composited transforms for frequently animated navigation elements. */
+.site-nav,
+.mobile-menu-button,
+.modal-close {
+  backface-visibility: hidden;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .site-nav,
+  .mobile-menu-button,
+  .modal-close,
+  .hero__texture,
+  .hero__glow {
+    transition: none !important;
+    animation: none !important;
+  }
+}

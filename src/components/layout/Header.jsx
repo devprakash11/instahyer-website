@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Menu, X } from "lucide-react";
 import BrandLogo from "../common/BrandLogo";
 
@@ -11,6 +11,17 @@ const navLinks = [
 ];
 
 function Header({ menuOpen, onToggleMenu, onCloseMenu, onRegister }) {
+  useEffect(() => {
+    if (!menuOpen) return undefined;
+
+    const handleKeyDown = (event) => {
+      if (event.key === "Escape") onCloseMenu();
+    };
+
+    window.addEventListener("keydown", handleKeyDown);
+    return () => window.removeEventListener("keydown", handleKeyDown);
+  }, [menuOpen, onCloseMenu]);
+
   return (
     <header className="site-header">
       <div className="container site-header__inner">

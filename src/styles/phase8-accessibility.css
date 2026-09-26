@@ -1,0 +1,61 @@
+/* Phase 8: accessibility and keyboard interaction refinements. */
+
+.skip-link {
+  position: fixed;
+  top: 12px;
+  left: 12px;
+  z-index: 10000;
+  transform: translateY(-180%);
+  padding: 10px 14px;
+  border-radius: 8px;
+  background: #081426;
+  color: #ffffff;
+  font-weight: 700;
+  text-decoration: none;
+  box-shadow: 0 8px 24px rgb(0 0 0 / 18%);
+  transition: transform 160ms ease;
+}
+
+.skip-link:focus {
+  transform: translateY(0);
+  outline: 3px solid #ffab0e;
+  outline-offset: 3px;
+}
+
+:where(a, button, input, select, textarea, [tabindex]:not([tabindex="-1"])):focus-visible {
+  outline: 3px solid #ffab0e;
+  outline-offset: 3px;
+}
+
+:where(input, select, textarea):focus-visible {
+  border-color: #2563eb;
+  box-shadow: 0 0 0 3px rgb(37 99 235 / 18%);
+}
+
+:where(button, a) {
+  -webkit-tap-highlight-color: transparent;
+}
+
+@media (pointer: coarse) {
+  :where(a, button, input, select, textarea) {
+    min-height: 44px;
+  }
+
+  .social-links a,
+  .modal-close {
+    min-width: 44px;
+  }
+}
+
+@media (prefers-contrast: more) {
+  :where(a, button, input, select, textarea, [tabindex]:not([tabindex="-1"])):focus-visible {
+    outline-width: 4px;
+    outline-offset: 4px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .skip-link {
+    transition: none;
+  }
+}

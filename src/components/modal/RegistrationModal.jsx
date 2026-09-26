@@ -159,25 +159,25 @@ function RegistrationModal({ open, onClose }) {
             <form className="registration-form" onSubmit={handleSubmit} noValidate>
               <div className="form-grid">
                 <label className={fieldClass("name")}>Full name <span aria-hidden="true">*</span>
-                  <input name="name" value={form.name} onChange={updateField} autoComplete="name" aria-invalid={Boolean(errors.name)} aria-describedby={errors.name ? "name-error" : undefined} />
+                  <input name="name" type="text" value={form.name} onChange={updateField} autoComplete="name" required aria-required="true" aria-invalid={Boolean(errors.name)} aria-describedby={errors.name ? "name-error" : undefined} />
                   {errors.name && <small id="name-error" className="form-error" role="alert">{errors.name}</small>}
                 </label>
                 <label className={fieldClass("email")}>Work email <span aria-hidden="true">*</span>
-                  <input name="email" type="email" value={form.email} onChange={updateField} autoComplete="email" inputMode="email" aria-invalid={Boolean(errors.email)} aria-describedby={errors.email ? "email-error" : undefined} />
+                  <input name="email" type="email" value={form.email} onChange={updateField} autoComplete="email" inputMode="email" required aria-required="true" aria-invalid={Boolean(errors.email)} aria-describedby={errors.email ? "email-error" : undefined} />
                   {errors.email && <small id="email-error" className="form-error" role="alert">{errors.email}</small>}
                 </label>
                 <label className={fieldClass("phone")}>Phone number <span aria-hidden="true">*</span>
-                  <input name="phone" type="tel" value={form.phone} onChange={updateField} autoComplete="tel" inputMode="tel" aria-invalid={Boolean(errors.phone)} aria-describedby={errors.phone ? "phone-error" : undefined} />
+                  <input name="phone" type="tel" value={form.phone} onChange={updateField} autoComplete="tel" inputMode="tel" required aria-required="true" aria-invalid={Boolean(errors.phone)} aria-describedby={errors.phone ? "phone-error" : undefined} />
                   {errors.phone && <small id="phone-error" className="form-error" role="alert">{errors.phone}</small>}
                 </label>
                 <label className="form-field">Company
-                  <input name="company" value={form.company} onChange={updateField} autoComplete="organization" />
+                  <input name="company" type="text" value={form.company} onChange={updateField} autoComplete="organization" />
                 </label>
                 <label className="form-field">Job role
-                  <input name="role" value={form.role} onChange={updateField} autoComplete="organization-title" />
+                  <input name="role" type="text" value={form.role} onChange={updateField} autoComplete="organization-title" />
                 </label>
                 <label className="form-field">City
-                  <input name="city" value={form.city} onChange={updateField} autoComplete="address-level2" />
+                  <input name="city" type="text" value={form.city} onChange={updateField} autoComplete="address-level2" />
                 </label>
               </div>
 
@@ -186,7 +186,7 @@ function RegistrationModal({ open, onClose }) {
               </label>
 
               <label className={`form-consent${errors.consent ? " form-consent--error" : ""}`}>
-                <input name="consent" type="checkbox" checked={form.consent} onChange={updateField} aria-invalid={Boolean(errors.consent)} aria-describedby={errors.consent ? "consent-error" : undefined} />
+                <input name="consent" type="checkbox" checked={form.consent} onChange={updateField} required aria-required="true" aria-invalid={Boolean(errors.consent)} aria-describedby={errors.consent ? "consent-error" : undefined} />
                 <span>I agree to receive webinar updates and related Instahyer communications.</span>
                 {errors.consent && <small id="consent-error" className="form-error" role="alert">{errors.consent}</small>}
               </label>

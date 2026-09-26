@@ -1,0 +1,129 @@
+/* =========================================================
+   PHASE 4: RESPONSIVE + UI REFINEMENT
+   Targeted overrides for small screens, touch targets and
+   content density. Kept separate from the legacy stylesheet
+   so responsive fixes remain easy to audit and remove.
+   ========================================================= */
+
+html,
+body,
+#root {
+  max-width: 100%;
+  overflow-x: hidden;
+}
+
+@media (max-width: 820px) {
+  .site-header__inner {
+    position: relative;
+  }
+
+  .menu-toggle {
+    min-width: 44px;
+    min-height: 44px;
+  }
+
+  .site-nav > a,
+  .site-nav__button {
+    min-height: 44px;
+  }
+
+  .agenda__interactive {
+    max-width: none;
+  }
+
+  .contest__list li {
+    min-height: 52px;
+  }
+}
+
+@media (max-width: 620px) {
+  .section-heading h2 {
+    max-width: 18ch;
+  }
+
+  .agenda__timeline li {
+    grid-template-columns: 35px minmax(0, 1fr);
+    gap: 17px;
+  }
+
+  .agenda__item p {
+    max-width: 52ch;
+  }
+
+  .final-cta__details > div {
+    align-items: flex-start;
+  }
+
+  .final-cta__details .button {
+    width: 100%;
+    min-height: 46px;
+  }
+
+  .registration-modal {
+    width: min(100%, 560px);
+  }
+
+  .modal-close {
+    top: 12px;
+    right: 12px;
+    width: 44px;
+    height: 44px;
+  }
+}
+
+@media (max-width: 480px) {
+  .panelist-card {
+    grid-template-columns: 124px minmax(0, 1fr);
+    height: auto;
+    min-height: 184px;
+  }
+
+  .panelist-card__image {
+    min-height: 184px;
+  }
+
+  .panelist-card__content {
+    padding: 20px 12px 15px;
+  }
+
+  .panelist-card__role,
+  .panelist-card__company {
+    font-size: 11px;
+    line-height: 1.35;
+  }
+
+  .panelist-card__bio {
+    font-size: 11px;
+    line-height: 1.4;
+  }
+}
+
+@media (max-width: 370px) {
+  .hero__inner {
+    width: calc(100% - 24px);
+  }
+
+  .panelist-card {
+    grid-template-columns: 108px minmax(0, 1fr);
+  }
+
+  .panelist-card__image {
+    min-height: 176px;
+  }
+
+  .panelist-card__content {
+    padding: 18px 10px 14px;
+  }
+
+  .panelist-card__content h3 {
+    font-size: 15px;
+  }
+
+  .panelist-card__bio {
+    font-size: 10.5px;
+  }
+
+  .registration-modal {
+    padding-inline: 16px;
+  }
+}

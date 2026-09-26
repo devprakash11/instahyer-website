@@ -12,7 +12,6 @@ body,
   overflow-x: hidden;
 }
 
-/* Tablet and compact desktop */
 @media (max-width: 1100px) {
   .container {
     width: min(calc(100% - 40px), 960px);
@@ -58,7 +57,6 @@ body,
   }
 }
 
-/* Main mobile navigation breakpoint */
 @media (max-width: 820px) {
   .site-header__inner {
     position: relative;
@@ -88,7 +86,7 @@ body,
     backdrop-filter: blur(12px);
   }
 
-  .site-nav.is-open {
+  .site-nav.site-nav--open {
     display: flex;
   }
 
@@ -174,7 +172,6 @@ body,
   }
 }
 
-/* Phones */
 @media (max-width: 620px) {
   .container {
     width: min(calc(100% - 32px), 560px);
@@ -312,7 +309,6 @@ body,
   }
 }
 
-/* Small phones */
 @media (max-width: 480px) {
   .hero__inner {
     width: calc(100% - 28px);
@@ -400,7 +396,6 @@ body,
   }
 }
 
-/* Touch devices: remove hover lift that can feel sticky on mobile. */
 @media (hover: none) and (pointer: coarse) {
   .button:hover {
     transform: none;
@@ -411,7 +406,6 @@ body,
   }
 }
 
-/* Respect OS-level reduced-motion preferences. */
 @media (prefers-reduced-motion: reduce) {
   html {
     scroll-behavior: auto;
@@ -427,7 +421,6 @@ body,
   }
 }
 
-/* Avoid viewport clipping on devices with display cut-outs. */
 @supports (padding: max(0px)) {
   .site-header__inner,
   .hero__inner,

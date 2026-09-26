@@ -13,7 +13,7 @@ function ContestSection({ onRegister }) {
             Share your most interesting question about remote hiring, HR leadership or scalable growth. The best entries may be answered live and selected for prizes.
           </p>
           <button className="button button--accent" type="button" onClick={onRegister}>
-            Enter with your registration <ArrowRight size={17} />
+            Enter with your registration <ArrowRight size={17} aria-hidden="true" />
           </button>
         </div>
 
@@ -22,7 +22,7 @@ function ContestSection({ onRegister }) {
             const Icon = item.icon;
             return (
               <li key={item.text}>
-                <span><Icon size={17} /></span>
+                <span aria-hidden="true"><Icon size={17} /></span>
                 {item.text}
               </li>
             );

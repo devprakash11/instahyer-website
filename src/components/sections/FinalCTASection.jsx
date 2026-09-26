@@ -13,17 +13,21 @@ function FinalCTASection({ onRegister }) {
         </div>
 
         <div className="final-cta__details">
-          <div><CalendarDays size={16} /><span>22 August, 2026 (Sunday)</span></div>
-          <div><Clock3 size={16} /><span>4:00 PM - 5:30 PM IST</span></div>
-          <div><MonitorPlay size={16} /><span>Live Online (Google Meet)</span></div>
-          <div><TicketCheck size={16} /><span>Free Registration</span></div>
+          <div><CalendarDays size={16} aria-hidden="true" /><span>22 August, 2026 (Sunday)</span></div>
+          <div><Clock3 size={16} aria-hidden="true" /><span>4:00 PM - 5:30 PM IST</span></div>
+          <div><MonitorPlay size={16} aria-hidden="true" /><span>Live Online (Google Meet)</span></div>
+          <div><TicketCheck size={16} aria-hidden="true" /><span>Free Registration</span></div>
           <button className="button button--accent" type="button" onClick={onRegister}>
-            Register for the Live Webinar <ArrowRight size={16} />
+            Register for the Live Webinar <ArrowRight size={16} aria-hidden="true" />
           </button>
         </div>
 
         <div className="final-cta__image">
-          <img src="/images/registration-illustration.webp" alt="Remote hiring registration illustration" loading="lazy" />
+          <img
+            src="/images/registration-illustration.webp"
+            alt="Remote hiring registration illustration"
+            loading="lazy"
+          />
         </div>
       </div>
     </section>

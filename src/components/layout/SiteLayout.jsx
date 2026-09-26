@@ -18,24 +18,30 @@ function SiteLayout({ children }) {
 
   return (
     <>
-      <Header
-        menuOpen={menuOpen}
-        onToggleMenu={() => {
-          setMenuOpen((current) => !current);
-        }}
-        onCloseMenu={() => {
-          setMenuOpen(false);
-        }}
-        onRegister={openRegistration}
-      />
+      <a className="skip-link" href="#main-content">
+        Skip to main content
+      </a>
 
-      <main>
-        {typeof children === "function"
-          ? children({ openRegistration })
-          : children}
-      </main>
+      <div aria-hidden={registrationOpen}>
+        <Header
+          menuOpen={menuOpen}
+          onToggleMenu={() => {
+            setMenuOpen((current) => !current);
+          }}
+          onCloseMenu={() => {
+            setMenuOpen(false);
+          }}
+          onRegister={openRegistration}
+        />
 
-      <Footer />
+        <main id="main-content" tabIndex="-1">
+          {typeof children === "function"
+            ? children({ openRegistration })
+            : children}
+        </main>
+
+        <Footer />
+      </div>
 
       <RegistrationModal
         open={registrationOpen}

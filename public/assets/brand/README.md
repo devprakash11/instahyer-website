@@ -1,6 +1,10 @@
 # Brand assets
 
-- `instahyer-logo.svg`: canonical horizontal Instahyer wordmark.
-- `instahyer-favicon.svg`: canonical compact mark for browser/app surfaces.
+The provided Instahyer visual assets are the source of truth:
 
-These are the source-of-truth brand assets. Components should reference these paths through `brand.config.js` instead of hardcoding asset URLs.
+- `/images/visual-element/Logo.png` - primary Instahyer logo.
+- `/images/visual-element/favicon-icon.png` - browser/app favicon.
+
+`brand.config.js` references these canonical files so the header/footer and document metadata use the supplied assets.
+
+The SVG files in this directory are legacy generated fallbacks and are not referenced by the application.

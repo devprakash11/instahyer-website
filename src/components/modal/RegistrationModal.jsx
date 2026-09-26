@@ -1,5 +1,5 @@
 import React, { useEffect, useId, useRef, useState } from "react";
-import { CheckCircle2, X } from "lucide-react";
+import { CheckCircle2, LoaderCircle, X } from "lucide-react";
 import useBodyLock from "../../hooks/useBodyLock";
 
 const initialForm = {
@@ -13,6 +13,8 @@ const initialForm = {
   consent: false,
 };
 
+const requiredFields = ["name", "email", "phone"];
+
 function RegistrationModal({ open, onClose }) {
   const titleId = useId();
   const descriptionId = useId();
@@ -20,7 +22,9 @@ function RegistrationModal({ open, onClose }) {
   const closeButtonRef = useRef(null);
   const previousActiveElementRef = useRef(null);
   const [form, setForm] = useState(initialForm);
+  const [errors, setErrors] = useState({});
   const [submitted, setSubmitted] = useState(false);
+  const [isSubmitting, setIsSubmitting] = useState(false);
   useBodyLock(open);
 
   useEffect(() => {
@@ -43,7 +47,7 @@ function RegistrationModal({ open, onClose }) {
         dialogRef.current.querySelectorAll(focusableSelector),
       );
 
-      if (focusableElements.length === 0) {
+      if (!focusableElements.length) {
         event.preventDefault();
         return;
       }
@@ -73,6 +77,8 @@ function RegistrationModal({ open, onClose }) {
   useEffect(() => {
     if (!open) {
       setSubmitted(false);
+      setErrors({});
+      setIsSubmitting(false);
     }
   }, [open]);
 
@@ -84,25 +90,69 @@ function RegistrationModal({ open, onClose }) {
       ...current,
       [name]: type === "checkbox" ? checked : value,
     }));
+    setErrors((current) => ({ ...current, [name]: "" }));
   };
 
-  const handleSubmit = (event) => {
+  const validateForm = () => {
+    const nextErrors = {};
+
+    requiredFields.forEach((field) => {
+      if (!form[field].trim()) nextErrors[field] = "This field is required.";
+    });
+
+    if (form.email && !/^\S+@\S+\.\S+$/.test(form.email)) {
+      nextErrors.email = "Enter a valid work email address.";
+    }
+
+    if (form.phone && !/^[+\d][\d\s().-]{7,}$/.test(form.phone)) {
+      nextErrors.phone = "Enter a valid phone number.";
+    }
+
+    if (!form.consent) {
+      nextErrors.consent = "Please accept the communication consent to continue.";
+    }
+
+    setErrors(nextErrors);
+    return nextErrors;
+  };
+
+  const handleSubmit = async (event) => {
     event.preventDefault();
+    if (isSubmitting) return;
+
+    const nextErrors = validateForm();
+    if (Object.keys(nextErrors).length) {
+      const firstErrorField = Object.keys(nextErrors)[0];
+      document.getElementsByName(firstErrorField)[0]?.focus();
+      return;
+    }
+
+    setIsSubmitting(true);
+
+    // The current website has no registration API configured yet.
+    // Keep the interaction async so a future API integration can replace this safely.
+    await new Promise((resolve) => window.setTimeout(resolve, 500));
+
+    setIsSubmitting(false);
     setSubmitted(true);
   };
 
   const closeAndReset = () => {
     setForm(initialForm);
+    setErrors({});
     setSubmitted(false);
+    setIsSubmitting(false);
     onClose();
   };
+
+  const fieldClass = (name) => (errors[name] ? "form-field form-field--error" : "form-field");
 
   return (
     <div
       className="modal-backdrop"
       role="presentation"
       onMouseDown={(event) => {
-        if (event.target === event.currentTarget) closeAndReset();
+        if (event.target === event.currentTarget && !isSubmitting) closeAndReset();
       }}
     >
       <section
@@ -119,6 +169,7 @@ function RegistrationModal({ open, onClose }) {
           type="button"
           aria-label="Close registration form"
           onClick={closeAndReset}
+          disabled={isSubmitting}
         >
           <X size={19} aria-hidden="true" />
         </button>
@@ -131,35 +182,38 @@ function RegistrationModal({ open, onClose }) {
               Complete the form to register. You may also submit a question for the #FutureOfHR contest.
             </p>
 
-            <form className="registration-form" onSubmit={handleSubmit}>
+            <form className="registration-form" onSubmit={handleSubmit} noValidate>
               <div className="form-grid">
-                <label>
+                <label className={fieldClass("name")}>
                   Full name <span aria-hidden="true">*</span>
-                  <input name="name" value={form.name} onChange={updateField} autoComplete="name" required />
+                  <input name="name" value={form.name} onChange={updateField} autoComplete="name" aria-invalid={Boolean(errors.name)} aria-describedby={errors.name ? "name-error" : undefined} />
+                  {errors.name && <small id="name-error" className="form-error">{errors.name}</small>}
                 </label>
-                <label>
+                <label className={fieldClass("email")}>
                   Work email <span aria-hidden="true">*</span>
-                  <input name="email" type="email" value={form.email} onChange={updateField} autoComplete="email" required />
+                  <input name="email" type="email" value={form.email} onChange={updateField} autoComplete="email" inputMode="email" aria-invalid={Boolean(errors.email)} aria-describedby={errors.email ? "email-error" : undefined} />
+                  {errors.email && <small id="email-error" className="form-error">{errors.email}</small>}
                 </label>
-                <label>
+                <label className={fieldClass("phone")}>
                   Phone number <span aria-hidden="true">*</span>
-                  <input name="phone" type="tel" value={form.phone} onChange={updateField} autoComplete="tel" required />
+                  <input name="phone" type="tel" value={form.phone} onChange={updateField} autoComplete="tel" inputMode="tel" aria-invalid={Boolean(errors.phone)} aria-describedby={errors.phone ? "phone-error" : undefined} />
+                  {errors.phone && <small id="phone-error" className="form-error">{errors.phone}</small>}
                 </label>
-                <label>
+                <label className="form-field">
                   Company
                   <input name="company" value={form.company} onChange={updateField} autoComplete="organization" />
                 </label>
-                <label>
+                <label className="form-field">
                   Job role
                   <input name="role" value={form.role} onChange={updateField} autoComplete="organization-title" />
                 </label>
-                <label>
+                <label className="form-field">
                   City
                   <input name="city" value={form.city} onChange={updateField} autoComplete="address-level2" />
                 </label>
               </div>
 
-              <label>
+              <label className="form-field">
                 Your question for the panel
                 <textarea
                   name="question"
@@ -169,13 +223,14 @@ function RegistrationModal({ open, onClose }) {
                 />
               </label>
 
-              <label className="form-consent">
-                <input name="consent" type="checkbox" checked={form.consent} onChange={updateField} required />
+              <label className={`form-consent${errors.consent ? " form-consent--error" : ""}`}>
+                <input name="consent" type="checkbox" checked={form.consent} onChange={updateField} aria-invalid={Boolean(errors.consent)} aria-describedby={errors.consent ? "consent-error" : undefined} />
                 <span>I agree to receive webinar updates and related People First communications.</span>
+                {errors.consent && <small id="consent-error" className="form-error">{errors.consent}</small>}
               </label>
 
-              <button className="button button--primary button--full" type="submit">
-                Complete Registration
+              <button className="button button--primary button--full" type="submit" disabled={isSubmitting} aria-busy={isSubmitting}>
+                {isSubmitting ? <><LoaderCircle className="button__spinner" size={18} aria-hidden="true" /> Submitting...</> : "Complete Registration"}
               </button>
             </form>
           </>

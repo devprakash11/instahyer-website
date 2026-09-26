@@ -1,0 +1,16 @@
+{
+  "name": "Instahyer Remote Hiring Webinar",
+  "short_name": "Instahyer",
+  "description": "Instahyer webinar on the future of remote hiring, scalable recruitment and future-ready HR leadership.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#081426",
+  "theme_color": "#081426",
+  "icons": [
+    {
+      "src": "/images/visual-element/favicon-icon.png",
+      "sizes": "any",
+      "type": "image/png"
+    }
+  ]
+}

@@ -1,12 +1,13 @@
 {
-  "name": "people-first-webinar",
+  "name": "instahyer-webinar",
   "private": true,
   "version": "1.0.0",
   "type": "module",
   "scripts": {
     "dev": "vite",
     "build": "node ./node_modules/vite/bin/vite.js build",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "security:audit": "npm audit --audit-level=high"
   },
   "dependencies": {
     "lucide-react": "0.468.0",

@@ -17,7 +17,7 @@ function WhyAttendSection() {
             const Icon = item.icon;
             return (
               <article className="why-card" key={item.title}>
-                <span><Icon size={24} /></span>
+                <span aria-hidden="true"><Icon size={24} /></span>
                 <div>
                   <h3>{item.title}</h3>
                   <p>{item.description}</p>

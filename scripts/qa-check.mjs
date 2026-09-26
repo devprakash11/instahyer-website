@@ -6,6 +6,8 @@ const root = fileURLToPath(new URL('..', import.meta.url));
 const requiredFiles = [
   'index.html',
   'package.json',
+  'vercel.json',
+  '.vercelignore',
   'src/main.jsx',
   'src/App.jsx',
   'src/config/brand.config.js',
@@ -16,8 +18,7 @@ const requiredFiles = [
   'src/components/modal/RegistrationModal.jsx',
   'public/robots.txt',
   'public/sitemap.xml',
-  'public/_headers',
-  'public/_redirects',
+  'public/site.webmanifest',
 ];
 
 const requiredAssets = [
@@ -34,14 +35,21 @@ for (const file of [...requiredFiles, ...requiredAssets]) {
 }
 
 const index = readFileSync(join(root, 'index.html'), 'utf8');
-const packageJson = JSON.parse(readFileSync(join(root, 'package.json'), 'utf8'));
+const packageJson = JSON.parse(readFileSync(join(root, 'package.json')));
+const vercelConfig = JSON.parse(readFileSync(join(root, 'vercel.json')));
 
 const requiredChecks = [
   [index.includes('favicon-icon.png'), 'index.html references the favicon'],
+  [index.includes('site.webmanifest'), 'index.html references the web manifest'],
   [index.includes('hero-illustration.webp'), 'index.html preloads the hero illustration'],
   [packageJson.scripts?.build, 'package.json defines a production build script'],
   [packageJson.scripts?.['security:audit'], 'package.json defines a security audit script'],
   [packageJson.engines?.node === '20.x', 'package.json pins the supported Node major version'],
+  [vercelConfig.framework === 'vite', 'vercel.json uses the Vite framework preset'],
+  [vercelConfig.outputDirectory === 'dist', 'vercel.json uses the Vite dist output directory'],
+  [vercelConfig.buildCommand === 'npm run build', 'vercel.json uses the production build command'],
+  [Array.isArray(vercelConfig.rewrites) && vercelConfig.rewrites.length > 0, 'vercel.json defines SPA routing'],
+  [Array.isArray(vercelConfig.headers) && vercelConfig.headers.length > 0, 'vercel.json defines production headers'],
 ];
 
 for (const [passed, label] of requiredChecks) {

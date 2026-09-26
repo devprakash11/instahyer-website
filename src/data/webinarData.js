@@ -18,7 +18,7 @@ import {
 } from "lucide-react";
 
 export const eventDetails = [
-  { label: "Date", value: "22 August, 2026", note: "Sunday" },
+  { label: "Date", value: "22 August, 2026", note: "Saturday" },
   { label: "Time", value: "4:00 PM - 5:30 PM", note: "IST" },
   { label: "Format", value: "Live Online", note: "Google Meet" },
   { label: "Price", value: "Free", note: "Registration" },
